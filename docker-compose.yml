@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: my_microservice_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - backend
+
+  api-gateway:
+    ports:
+      - '8000:3000'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    build:
+      context: .
+      dockerfile: ./apps/api-gateway/Dockerfile
+      target: development
+    command: npm run start:dev api-gateway
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    networks:
+      - backend
+
+  user-service:
+    ports:
+      - '8001:3001'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    build:
+      context: .
+      dockerfile: ./apps/user-service/Dockerfile
+      target: development
+    command: npm run start:dev user-service
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    networks:
+      - backend
+
+  product-service:
+    ports:
+      - '8002:3002'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    build:
+      context: .
+      dockerfile: ./apps/product-service/Dockerfile
+      target: development
+    command: npm run start:dev product-service
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  postgres-data: 
