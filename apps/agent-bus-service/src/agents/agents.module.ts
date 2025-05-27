@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { PersonaAgent } from './persona.agent';
-import { LLMModule } from '../domain/llm/llm.module';
+import { LlmModule } from '../domain/llm/llm.module';
 
 @Module({
-  imports: [LLMModule],
+  imports: [LlmModule],
   providers: [PersonaAgent],
   exports: [PersonaAgent],
 })

@@ -1,25 +1,21 @@
 import { IsArray, IsInt, IsObject, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreatePersonaDto {
     @IsInt()
     count: number;
-
-    @IsString()
-    context: string;
 
     @IsArray()
     @IsString({ each: true })
     @IsOptional()
     fields?: string[];
 
-    @IsObject()
-    @IsOptional()
-    constraints?: Record<string, string[] | number[] | boolean[]>;
-
     @IsString()
+    @IsOptional()
     scenario?: string;
 
     @IsArray()
+    @IsString({ each: true })
     @IsOptional()
     emotions?: string[];
 }
