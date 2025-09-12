@@ -67,8 +67,8 @@ interface EvaluationResponse {
 @Injectable()
 export class EvaluationAgent {
   private readonly logger = new Logger(EvaluationAgent.name);
-  private readonly MODEL_URL = 'https://harsh-m84onpva-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-12-01-preview';
-  private readonly API_KEY = 'C4nHEVwGLsfv20S6NSN7WWAJwK5MLkuWBlcvn2OcJb68IfS0uCESJQQJ99BCACHYHv6XJ3w3AAAAACOGolyT';
+  private readonly MODEL_URL = process.env.EVALUATION_LLM_URL || 'https://harsh-m84onpva-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-12-01-preview';
+  private readonly API_KEY = process.env.EVALUATION_LLM_API_KEY || '';
 
   private getSystemPromptForAgent(agent: string): string {
     switch (agent.toLowerCase()) {

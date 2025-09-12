@@ -19,7 +19,7 @@ class CustomLLM extends BaseChatModel {
     const messageContent = messages[messages.length - 1].content;
     
     try {
-      const response = await axios.post('https://harsh-m84onpva-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-12-01-preview', {
+      const response = await axios.post(process.env.PERSONA_LLM_URL || 'https://harsh-m84onpva-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-12-01-preview', {
         messages: [
           {
             role: 'user',
@@ -30,7 +30,7 @@ class CustomLLM extends BaseChatModel {
       }, {
         headers: {
           'Content-Type': 'application/json',
-          'api-key': 'C4nHEVwGLsfv20S6NSN7WWAJwK5MLkuWBlcvn2OcJb68IfS0uCESJQQJ99BCACHYHv6XJ3w3AAAAACOGolyT',
+          'api-key': process.env.PERSONA_LLM_API_KEY || '',
         },
       });
 
