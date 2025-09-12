@@ -19,6 +19,15 @@
         "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
       }
     },
+    "agent-bus-service": {
+      "type": "application",
+      "root": "apps/agent-bus-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/agent-bus-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/agent-bus-service/tsconfig.app.json"
+      }
+    },
     "user-service": {
       "type": "application",
       "root": "apps/user-service",

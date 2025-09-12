@@ -8,8 +8,9 @@ This is a microservices-based backend system built with NestJS, PostgreSQL, Redi
 .
 ├── apps/                    # Application modules
 │   ├── api-gateway/         # API Gateway service
-│   ├── user-service/        # User management service
-│   └── product-service/     # Product management service
+│   ├── agent-bus-service/   # Agent Bus service
+│   ├── script-smith-service/ # Script Smith service
+│   └── truthlens-service/   # Truthlens service
 ├── libs/                    # Shared libraries
 │   ├── database/            # Database connection and entities
 │   ├── authentication/      # Authentication utilities
@@ -63,6 +64,9 @@ npm run start:dev
 npm run start:user
 npm run start:product
 
+# Run all microservices at once
+npm run start:all
+
 # Build the application
 npm run build
 
@@ -78,6 +82,22 @@ npm run test:watch
 npm run test:cov
 npm run test:e2e
 ```
+
+### Running All Microservices
+
+You can run all microservices simultaneously using either:
+
+1. **NPM Script**: 
+   ```bash
+   npm run start:all
+   ```
+
+2. **VS Code Task**:
+   - Open the Command Palette (Ctrl+Shift+P or Cmd+Shift+P)
+   - Type "Tasks: Run Task"
+   - Select "Run All Microservices"
+
+This will start all microservices (api-gateway, agent-bus-service, script-smith-service, and truthlens-service) in parallel with color-coded output for easy identification.
 
 ### Database Migrations
 

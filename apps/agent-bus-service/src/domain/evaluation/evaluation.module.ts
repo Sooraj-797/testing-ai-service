@@ -1,0 +1,12 @@
+import { Module } from '@nestjs/common';
+import { EvaluationController } from './evaluation.controller';
+import { EvaluationService } from './evaluation.service';
+import { AgentsModule } from '../../agents/agents.module';
+
+@Module({
+  imports: [AgentsModule],
+  controllers: [EvaluationController],
+  providers: [EvaluationService],
+  exports: [EvaluationService],
+})
+export class EvaluationModule {} 

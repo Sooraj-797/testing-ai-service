@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run All Microservices",
+      "type": "shell",
+      "command": "concurrently",
+      "args": [
+        "--names", "\"api-gateway,agent-bus,script-smith,truthlens\"",
+        "--prefix-colors", "\"blue.bold,green.bold,yellow.bold,red.bold\"",
+        "--kill-others",
+        "\"cd ${workspaceFolder} && npm run start:dev api-gateway\"",
+        "\"cd ${workspaceFolder} && npm run start:dev agent-bus-service\"",
+        "\"cd ${workspaceFolder} && npm run start:dev script-smith-service\"", 
+        "\"cd ${workspaceFolder} && npm run start:dev truthlens-service\""
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Run all microservices concurrently"
+    }
+  ]
+} 
